@@ -1,305 +1,276 @@
 <template>
-  <div class="container" style="ba">
-    <div class="columns" id="header" style="height: 6em">
-      <div class="column col-3 col-mr-auto" id="logo" style="background-color: blueviolet; line-height: 30px">
-        <!--<img src="../assets/img/6c2d6d1289c6.jpg" style="border-radius: 5em; height: 60px"/>-->
-        <h3 style="font-size: x-large; color: white">SI HAI YU LE LOG</h3>
-      </div>
-      <div class="columns col-9 col-mx-auto" id="notice">
-        <div class="column col-1 text-center rounded " v-for="(item, index) in lottery_num_result"
-             style="height: 5em;width:5em;
-             margin-top:0.5em;
-             margin-left: 1.6em;
-             text-align:center;
-             line-height:5.5em;">
-          <div class="bg-error" style="height: 1.5em;width:1.5em;font-size: 3.5em;font-weight: bold;color: #2c3e50">
-            {{item}}
-          </div>
-        </div>
+  <div class="container " style="">
 
-      </div>
+    <div class="columns m-0 shadow" id="header" style="padding-top:.3rem;height: 6em;">
 
-    </div>
-
-    <div class="columns col-13" style="background-color: #2c3e50" id="nav">
-
-      <ul class="breadcrumb">
-        <li class="breadcrumb-item">
-          <a href="#">Home</a>
-        </li>
-        <li class="breadcrumb-item">
-          <a href="#">Settings</a>
-        </li>
-        <li class="breadcrumb-item">
-          <a href="#">Change avatar</a>
-        </li>
-        <li class="breadcrumb-item">
-          <a href="#">Change avatar</a>
-        </li>
-        <li class="breadcrumb-item">
-          <a href="#">Change avatar</a>
-        </li>
-        <li class="">
-          <a href="#"></a>
-        </li>
-      </ul>
-
-    </div>
-
-    <div class="columns" style="height: 36em;">
-      <div class="col-3 col-mr-auto" style="background-color: paleturquoise">
-        <div class="column col-9 col-sm-12" style="margin-top: 1em">
-          <div class="tile">
-            <div class="tile-icon">
+      <!-- 用户信息区域 -->
+      <div class="column col-2 col-mr-auto shadow bg-secondary">
+        <div class="tile">
+          <div class="tile-icon">
+            <div class="example-tile-icon">
               <figure class="avatar avatar-lg">
                 <img src="../../node_modules/spectre.css/docs/img/avatar-2.png" alt="Avatar">
               </figure>
             </div>
-            <div class="tile-content">
-              <p class="tile-title text-bold">{{user_info.user_id}}</p>
-              <p class="tile-subtitle text-bold text-gray" style="color: #6e29c0">
-                金额: 50000 &nbsp; &nbsp; 积分: {{user_info.calc_integrals}}
-              </p>
-              <p>
-                <button class="btn btn-primary btn-sm">充值</button>
-                <button class="btn btn-sm">提现</button>
-              </p>
-            </div>
           </div>
-        </div>
-
-        <div class="columns ">
-          <div class="col-10 col-mx-auto">
-            <div class="form-group  col-11 col-mx-auto">
-              <button class="btn  col-11 ">扩展功能按钮</button>
-            </div>
-            <div class="form-group  col-11 col-mx-auto">
-              <button class="btn  col-11 ">扩展功能按钮</button>
-            </div>
-            <div class="form-group  col-11 col-mx-auto">
-              <button class="btn  col-11 ">扩展功能按钮</button>
-            </div>
-            <div class="form-group  col-11 col-mx-auto">
-              <button class="btn  col-11 ">扩展功能按钮</button>
-            </div>
-            <li class="breadcrumb-item">
-              <a href="#">Change avatar</a>
-            </li>
+          <div class="tile-content">
+            <p class="tile-title">{{user_info.user_id}}</p>
+            <p class="tile-subtitle text-gray">积分: {{user_info.calc_integrals}}</p>
+          </div>
+          <div class="tile-action" style="width: 2rem;">
+            <button class="btn btn-primary btn-sm" style="padding-bottom: 0.1rem" @click="showStuff('充值')">充值</button>
+            <button class="btn btn-sm" @click="showStuff('提现')">提现</button>
+            <button class="btn btn-link btn-sm" @click="loginOut">注销</button>
           </div>
         </div>
       </div>
 
 
-      <div class="col-9 col-ml-auto">
-        <div class="col-12 col-mr-auto" style="height: 18em;">
-          下注区
-
-          <!-- 第一行下注区 -->
-          <div class="columns col-12 col-mx-auto">
-            <div class="col-2 rounded card">
-              <div class="chip">
-                <figure class="avatar avatar-lg" data-initial="1"></figure>
-                投注金额:{{lottery_amt_result.location_amt1}}
-              </div>
-              <div class="col-10 col-mx-auto form-group">
-                <input class="form-input input-sm" type="text" v-model="user_order.location_amt1"
-                       @keyup="validNumber"
-                       @blur="validNumber"
-                       placeholder="请输入投注金额">
-              </div>
-            </div>
-
-            <div class="col-2 rounded card">
-              <div class="chip">
-                <figure class="avatar avatar-lg" data-initial="2"></figure>
-                投注金额:{{lottery_amt_result.location_amt2}}
-              </div>
-              <div class="col-10 col-mx-auto form-group">
-                <input class="form-input input-sm" type="text" v-model="user_order.location_amt2"
-                       @keyup="validNumber"
-                       @blur="validNumber"
-                       placeholder="请输入投注金额">
-              </div>
-            </div>
-
-            <div class="col-2 rounded card">
-              <div class="chip">
-                <figure class="avatar avatar-lg" data-initial="3"></figure>
-                投注金额:{{lottery_amt_result.location_amt3}}
-              </div>
-              <div class="col-10 col-mx-auto form-group">
-                <input class="form-input input-sm" type="text" v-model="user_order.location_amt3"
-                       @keyup="validNumber"
-                       @blur="validNumber"
-                       placeholder="请输入投注金额">
-              </div>
-            </div>
-
-            <div class="col-2 rounded card">
-              <div class="chip">
-                <figure class="avatar avatar-lg" data-initial="4"></figure>
-                投注金额:{{lottery_amt_result.location_amt4}}
-              </div>
-              <div class="col-10 col-mx-auto form-group">
-                <input class="form-input input-sm" type="text" v-model="user_order.location_amt4"
-                       @keyup="validNumber"
-                       @blur="validNumber"
-                       placeholder="请输入投注金额">
-              </div>
-            </div>
-
-            <div class="col-2 rounded card">
-              <div class="chip">
-                <figure class="avatar avatar-lg" data-initial="5"></figure>
-                投注金额:{{lottery_amt_result.location_amt5}}
-              </div>
-              <div class="col-10 col-mx-auto form-group">
-                <input class="form-input input-sm" type="text" v-model="user_order.location_amt5"
-                       @keyup="validNumber"
-                       @blur="validNumber"
-                       placeholder="请输入投注金额">
-              </div>
-            </div>
-          </div>
+      <div class="col-1 " style="color: #e06870;" v-for="(item, index) in lottery_num_result">
+        <!--<img v-bind:src="['../assets/num_png/bullet-'+item+'.png']" style="width: 5rem">-->
+        <figure class="avatar avatar-xl bold shadow" v-bind:data-initial="[item]"></figure>
+      </div>
+    </div>
 
 
-          <!-- 第二行下注区 -->
-          <div class="columns col-12 col-mx-auto">
-            <div class="col-2 rounded card">
-              <div class="chip">
-                <figure class="avatar avatar-lg" data-initial="6"></figure>
-                投注金额:{{lottery_amt_result.location_amt6}}
-              </div>
-              <div class="col-10 col-mx-auto form-group">
-                <input class="form-input input-sm" type="text" v-model="user_order.location_amt6"
-                       @keyup="validNumber"
-                       @blur="validNumber"
-                       placeholder="请输入投注金额">
-              </div>
-            </div>
-
-            <div class="col-2 rounded card">
-              <div class="chip">
-                <figure class="avatar avatar-lg" data-initial="7"></figure>
-                投注金额:{{lottery_amt_result.location_amt7}}
-              </div>
-              <div class="col-10 col-mx-auto form-group">
-                <input class="form-input input-sm" type="text" v-model="user_order.location_amt7"
-                       @keyup="validNumber"
-                       @blur="validNumber"
-                       placeholder="请输入投注金额">
-              </div>
-            </div>
-
-            <div class="col-2 rounded card">
-              <div class="chip">
-                <figure class="avatar avatar-lg" data-initial="8"></figure>
-                投注金额:{{lottery_amt_result.location_amt8}}
-              </div>
-              <div class="col-10 col-mx-auto form-group">
-                <input class="form-input input-sm" type="text" v-model="user_order.location_amt8"
-                       @keyup="validNumber"
-                       @blur="validNumber"
-                       placeholder="请输入投注金额">
-              </div>
-            </div>
-
-            <div class="col-2 rounded card">
-              <div class="chip">
-                <figure class="avatar avatar-lg" data-initial="9"></figure>
-                投注金额:{{lottery_amt_result.location_amt9}}
-              </div>
-              <div class="col-10 col-mx-auto form-group">
-                <input class="form-input input-sm" type="text" v-model="user_order.location_amt9"
-                       @keyup="validNumber"
-                       @blur="validNumber"
-                       placeholder="请输入投注金额">
-              </div>
-            </div>
-
-            <div class="col-2 rounded card">
-              <div class="chip">
-                <figure class="avatar avatar-lg" data-initial="10"></figure>
-                投注金额:{{lottery_amt_result.location_amt10}}
-              </div>
-              <div class="col-10 col-mx-auto form-group">
-                <input class="form-input input-sm" type="text" v-model="user_order.location_amt10"
-                       @keyup="validNumber"
-                       placeholder="请输入投注金额">
-              </div>
-            </div>
-          </div>
-
-          <!-- 下注汇总提交区 -->
-          <div class="columns" style="margin-top: .8em; ">
-            <div class="column col-4 col-ml-auto">
-              <div class="input-group">
-                <span class="input-group-addon addon text-bold" style="width: 10rem;overflow: auto">
-                  总投注金额:
-                  {{
-                  parseInt(this.user_order.location_amt1 || "0", 0)+
-                  parseInt(this.user_order.location_amt2 || "0", 0)+
-                  parseInt(this.user_order.location_amt3 || "0", 0)+
-                  parseInt(this.user_order.location_amt4 || "0", 0)+
-                  parseInt(this.user_order.location_amt5 || "0", 0)+
-                  parseInt(this.user_order.location_amt6 || "0", 0)+
-                  parseInt(this.user_order.location_amt7 || "0", 0)+
-                  parseInt(this.user_order.location_amt8 || "0", 0)+
-                  parseInt(this.user_order.location_amt9 || "0", 0)+
-                  parseInt(this.user_order.location_amt10 || "0", 0)
-                  }}
-                </span>
-                <button class="btn input-group-btn btn" @click="userOrderpay">确认购买</button>
-              </div>
-            </div>
-          </div>
-
+    <!-- 第1行下注区 -->
+    <div class="columns bg-gray">
+      <div class="col-xs-2 rounded card shadow m-1">
+        <div class="chip shadow">
+          <figure class="avatar avatar-lg shadow" data-initial="1"></figure>
+          投注金额:{{lottery_amt_result.location_amt1}}
         </div>
-
-
-        <div class="col-12 col-mx-auto" style="height: 18em;margin-left: .5em">
-          开奖区
-
-          <table class="table table-striped table-hover">
-            <thead>
-            <tr>
-              <th>开奖期数</th>
-              <th>1号投注</th>
-              <th>2号投注</th>
-              <th>3号投注</th>
-              <th>4号投注</th>
-              <th>5号投注</th>
-              <th>6号投注</th>
-              <th>7号投注</th>
-              <th>8号投注</th>
-              <th>9号投注</th>
-              <th>10号投注</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr v-for="item in list_lottery_result">
-              <td>{{item.lottery_period}}期</td>
-              <td>{{item.location_amt1}}</td>
-              <td>{{item.location_amt2}}</td>
-              <td>{{item.location_amt3}}</td>
-              <td>{{item.location_amt4}}</td>
-              <td>{{item.location_amt5}}</td>
-              <td>{{item.location_amt6}}</td>
-              <td>{{item.location_amt7}}</td>
-              <td>{{item.location_amt8}}</td>
-              <td>{{item.location_amt9}}</td>
-              <td>{{item.location_amt10}}</td>
-            </tr>
-
-            </tbody>
-          </table>
-
+        <div class="col-10 col-mx-auto form-group ">
+          <input class="form-input input-sm shadow" type="text" v-model="user_order.location_amt1"
+                 @keyup="validNumber"
+                 @blur="validNumber"
+                 placeholder="请输入投注金额">
+        </div>
+      </div>
+      <div class="column col-lg-1"></div>
+      <div class="col-xs-2 rounded card shadow m-1">
+        <div class="chip shadow">
+          <figure class="avatar avatar-lg shadow" data-initial="2"></figure>
+          投注金额:{{lottery_amt_result.location_amt2}}
+        </div>
+        <div class="col-10 col-mx-auto form-group ">
+          <input class="form-input input-sm shadow" type="text" v-model="user_order.location_amt2"
+                 @keyup="validNumber"
+                 @blur="validNumber"
+                 placeholder="请输入投注金额">
+        </div>
+      </div>
+      <div class="column col-lg-1"></div>
+      <div class="col-xs-2 rounded card shadow m-1">
+        <div class="chip shadow">
+          <figure class="avatar avatar-lg shadow" data-initial="3"></figure>
+          投注金额:{{lottery_amt_result.location_amt3}}
+        </div>
+        <div class="col-10 col-mx-auto form-group ">
+          <input class="form-input input-sm shadow" type="text" v-model="user_order.location_amt3"
+                 @keyup="validNumber"
+                 @blur="validNumber"
+                 placeholder="请输入投注金额">
+        </div>
+      </div>
+      <div class="column col-lg-1"></div>
+      <div class="col-xs-2 rounded card shadow m-1">
+        <div class="chip shadow">
+          <figure class="avatar avatar-lg shadow" data-initial="4"></figure>
+          投注金额:{{lottery_amt_result.location_amt4}}
+        </div>
+        <div class="col-10 col-mx-auto form-group ">
+          <input class="form-input input-sm shadow" type="text" v-model="user_order.location_amt4"
+                 @keyup="validNumber"
+                 @blur="validNumber"
+                 placeholder="请输入投注金额">
+        </div>
+      </div>
+      <div class="column col-lg-1"></div>
+      <div class="col-xs-2 rounded card shadow m-1">
+        <div class="chip shadow">
+          <figure class="avatar avatar-lg shadow" data-initial="5"></figure>
+          投注金额:{{lottery_amt_result.location_amt5}}
+        </div>
+        <div class="col-10 col-mx-auto form-group ">
+          <input class="form-input input-sm shadow" type="text" v-model="user_order.location_amt5"
+                 @keyup="validNumber"
+                 @blur="validNumber"
+                 placeholder="请输入投注金额">
+        </div>
+      </div>
+    </div>
+    <!-- 第二行下注区 -->
+    <div class="columns bg-gray">
+      <div class="col-xs-2 rounded card shadow m-1">
+        <div class="chip shadow">
+          <figure class="avatar avatar-lg shadow" data-initial="6"></figure>
+          投注金额:{{lottery_amt_result.location_amt6}}
+        </div>
+        <div class="col-10 col-mx-auto form-group ">
+          <input class="form-input input-sm shadow" type="text" v-model="user_order.location_amt6"
+                 @keyup="validNumber"
+                 @blur="validNumber"
+                 placeholder="请输入投注金额">
+        </div>
+      </div>
+      <div class="column col-lg-1"></div>
+      <div class="col-xs-2 rounded card shadow m-1">
+        <div class="chip shadow">
+          <figure class="avatar avatar-lg shadow" data-initial="7"></figure>
+          投注金额:{{lottery_amt_result.location_amt7}}
+        </div>
+        <div class="col-10 col-mx-auto form-group ">
+          <input class="form-input input-sm shadow" type="text" v-model="user_order.location_amt7"
+                 @keyup="validNumber"
+                 @blur="validNumber"
+                 placeholder="请输入投注金额">
+        </div>
+      </div>
+      <div class="column col-lg-1"></div>
+      <div class="col-xs-2 rounded card shadow m-1">
+        <div class="chip shadow">
+          <figure class="avatar avatar-lg shadow" data-initial="8"></figure>
+          投注金额:{{lottery_amt_result.location_amt8}}
+        </div>
+        <div class="col-10 col-mx-auto form-group ">
+          <input class="form-input input-sm shadow" type="text" v-model="user_order.location_amt8"
+                 @keyup="validNumber"
+                 @blur="validNumber"
+                 placeholder="请输入投注金额">
+        </div>
+      </div>
+      <div class="column col-lg-1"></div>
+      <div class="col-xs-2 rounded card shadow m-1">
+        <div class="chip shadow">
+          <figure class="avatar avatar-lg shadow" data-initial="9"></figure>
+          投注金额:{{lottery_amt_result.location_amt9}}
+        </div>
+        <div class="col-10 col-mx-auto form-group ">
+          <input class="form-input input-sm shadow" type="text" v-model="user_order.location_amt9"
+                 @keyup="validNumber"
+                 @blur="validNumber"
+                 placeholder="请输入投注金额">
+        </div>
+      </div>
+      <div class="column col-lg-1"></div>
+      <div class="col-xs-2 rounded card shadow m-1">
+        <div class="chip shadow">
+          <figure class="avatar avatar-lg shadow" data-initial="10"></figure>
+          投注金额:{{lottery_amt_result.location_amt10}}
+        </div>
+        <div class="col-10 col-mx-auto form-group ">
+          <input class="form-input input-sm shadow" type="text" v-model="user_order.location_amt10"
+                 @keyup="validNumber"
+                 @blur="validNumber"
+                 placeholder="请输入投注金额">
         </div>
       </div>
     </div>
 
 
+    <div class="columns m-2">
+      <div class="column col-mx-auto col-4 ">
+        <div class="input-group shadow">
+          <span class="input-group-addon addon-lg">总投注金额</span>
+          <input type="text" class="form-input input-lg col-sm-1" readonly="readonly" placeholder="site name"
+                 v-model="total_amt">
+          <button class="btn btn-primary input-group-btn btn-lg" @click="userOrderpay">确认购买</button>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="columns " style="height: 33rem;">
+      <div class="column col-mx-auto col-12">
+        <table class="table table-striped table-hover shadow ">
+          <thead class="bg-secondary">
+          <tr>
+            <th>开奖期数</th>
+            <th>1号投注</th>
+            <th>2号投注</th>
+            <th>3号投注</th>
+            <th>4号投注</th>
+            <th>5号投注</th>
+            <th>6号投注</th>
+            <th>7号投注</th>
+            <th>8号投注</th>
+            <th>9号投注</th>
+            <th>10号投注</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr v-for="item in list_lottery_result">
+            <td>{{item.lottery_period}}期</td>
+            <td>{{item.location_amt1}}</td>
+            <td>{{item.location_amt2}}</td>
+            <td>{{item.location_amt3}}</td>
+            <td>{{item.location_amt4}}</td>
+            <td>{{item.location_amt5}}</td>
+            <td>{{item.location_amt6}}</td>
+            <td>{{item.location_amt7}}</td>
+            <td>{{item.location_amt8}}</td>
+            <td>{{item.location_amt9}}</td>
+            <td>{{item.location_amt10}}</td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="modal active " id="modal-notic" v-bind:class="[page_config.is_show_notic]">
+      <a href="#close" class="modal-overlay" aria-label="Close"></a>
+      <div class="modal-container">
+        <div class="modal-header">
+          <span href="#" class="btn btn-clear float-right" aria-label="Close" @click="hideNotic"></span>
+          <div class="modal-title h5"> 提示</div>
+        </div>
+        <div class="modal-body">
+          <div class="content">
+            <!-- content here -->
+            <p>{{page_config.msg}}</p>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-link btn-sm" @click="hideNotic">确认</button>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="modal active " id="modal-stuff" v-bind:class="[page_config.is_show_stuff]">
+      <a href="#close" class="modal-overlay" aria-label="Close"></a>
+      <div class="modal-container">
+        <div class="modal-header">
+          <span class="btn btn-clear float-right" aria-label="Close" @click="hideStuff"></span>
+
+          <div class="modal-title h5"> 提示</div>
+        </div>
+        <div class="modal-body">
+          <div class="content">
+            <!-- content here -->
+            <div class="columns m-1">
+              <div class="column col-mx-auto col-12 ">
+                <div class="input-group shadow">
+                  <span class="input-group-addon addon-lg">{{page_config.title}}金额</span>
+                  <input type="text" class="form-input input-lg col-sm-1" readonly="readonly" placeholder="site name"
+                         v-model="total_amt">
+                  <button class="btn btn-primary input-group-btn btn-lg" @click="userOrderpay">确认{{page_config.title}}
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-link btn-sm" @click="hideStuff"></button>
+        </div>
+      </div>
+    </div>
+
   </div>
+
+
 </template>
 
 <script>
@@ -308,67 +279,23 @@
     data() {
       return {
         //用户当前这期投注金额
-        user_order: {
-          location_amt1: 1110.0,
-          location_amt2: 2.0,
-          location_amt3: "",
-          location_amt4: "",
-          location_amt5: "",
-          location_amt6: "",
-          location_amt7: 0.0,
-          location_amt8: "",
-          location_amt9: "",
-          location_amt10: 0.0
-        },
+        user_order: {},
         //当前这期的总投注金额
-        lottery_amt_result: {
-          location_amt1: 200.0,
-          location_amt2: 2.0,
-          location_amt3: 200.0,
-          location_amt4: 2.0,
-          location_amt5: 202.0,
-          location_amt6: 62.0,
-          location_amt7: 92.0,
-          location_amt8: 2.0,
-          location_amt9: 2.0,
-          location_amt10: 2.0
-        },
+        lottery_amt_result: {},
         //当前这期的开奖号码
-        lottery_num_result: [
-          2,
-          3,
-          1,
-          5,
-          8,
-          4,
-          6,
-          7,
-          10,
-          9
-        ],
+        lottery_num_result: [],
         //用户当天的中奖纪录
-        list_lottery_result: [{
-          lottery_period: 1089996,
-          location_amt1: 200.0,
-          location_amt2: 2.0,
-          location_amt3: 200.0,
-          location_amt4: 2.0,
-          location_amt5: 202.0,
-          location_amt6: 62.0,
-          location_amt7: 92.0,
-          location_amt8: 2.0,
-          location_amt9: 2.0,
-          location_amt10: 2.0
-        }],
+        list_lottery_result: [],
         //用户信息
-        user_info: {
-          user_id: "The S.H.I.E.L.D.",
-          user_name: "The S.H.I.E.L.D.",
-          integrals: "7889",
-          calc_integrals: 0,
-          trial_integrals: "100"
-        },
-        total_amt: 0
+        user_info: {},
+        total_amt: 0,
+        page_config: {
+          title: "提示",
+          msg: "",
+          go_path: "",
+          is_show_notic: "isHide",
+          is_show_stuff: "isHide"
+        }
       }
     },
     mounted() {
@@ -377,6 +304,7 @@
 
       console.log("页面加载完成", this.lottery_amt_result, this)
 
+      this.testInitData()
       //调用本组件的方法
 
       //1.加载用户数据
@@ -392,6 +320,7 @@
       //3.加载开奖记录列表 list_lottery_result
       this.findOrderUserPayListInfo()
 
+
     },
 
     watch: {
@@ -403,27 +332,122 @@
     },
 
     methods: {
+      testInitData() {
+        for (let i = 0; i < 29; i++) {
+          let o = {
+            lottery_period: 1089996,
+            location_amt1: 200.0,
+            location_amt2: 2.0,
+            location_amt3: 200.0,
+            location_amt4: 2.0,
+            location_amt5: 202.0,
+            location_amt6: 62.0,
+            location_amt7: 92.0,
+            location_amt8: 2.0,
+            location_amt9: 2.0,
+            location_amt10: 2.0
+          }
+
+          this.list_lottery_result.push(o)
+        }
+
+        this.lottery_num_result = [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10
+        ];
+
+        this.user_order = {
+          location_amt1: 1110.0,
+          location_amt2: 2.0,
+          location_amt3: "",
+          location_amt4: "",
+          location_amt5: "",
+          location_amt6: "",
+          location_amt7: 0.0,
+          location_amt8: "",
+          location_amt9: "",
+          location_amt10: 0.0
+        };
+
+        this.lottery_amt_result = {
+          location_amt1: 200.0,
+          location_amt2: 2.0,
+          location_amt3: 200.0,
+          location_amt4: 2.0,
+          location_amt5: 202.0,
+          location_amt6: 62.0,
+          location_amt7: 92.0,
+          location_amt8: 2.0,
+          location_amt9: 2.0,
+          location_amt10: 2.0
+        };
+
+        this.user_info = {
+          user_id: "The S.H.I.E.L.D 12345678901",
+          user_name: "The S.H.I.E.L.D.",
+          integrals: "7889",
+          calc_integrals: 7889,
+          trial_integrals: "100"
+        }
+
+      },
+      goToLogin() {
+        this.$router.push({path: "Login"})
+        //this.$router.push({path: "/"})
+      },
+
+      showNotic(msg, path) {
+        this.page_config.is_show_notic = "isShow"
+        this.page_config.msg = msg
+        this.page_config.go_path = path
+      },
+      hideNotic() {
+        this.page_config.is_show_notic = "isHide"
+        if (this.page_config.go_path.length > 0) {
+          this.$router.push({path: this.page_config.go_path})
+        }
+      },
+      showStuff(title) {
+        this.page_config.title = title
+        this.page_config.is_show_stuff = "isShow"
+      },
+      hideStuff() {
+        this.page_config.is_show_stuff = "isHide"
+      },
+
+      loginOut(){
+        this.$axios.post(this.$app.context + '/loginOut',"")
+          .then(response => {
+            console.log(response)
+            this.$router.push({path: "/"})
+          })
+          .catch(error => {
+            console.log("注销出现异常.", error);
+          });
+      },
+
       //用户信息
       findUserInfo() {
         console.log("页面加载完成", "this findUserInfo")
         this.$axios.post(this.$app.context + '/findUserInfo', this.user)
           .then(response => {
-            if (response.data) {
-              console.log("页面加载完成", "this findUserInfo", response.data)
-              if (response.data == -1) {
-                alert("登录已经过期请重新登录");
-                this.$router.push({path: "Login"})
-              } else {
-                this.user_info = response.data
-              }
-
+            if (response.data == -1) {
+              this.showNotic("登录已经过期请重新登录","/")
             } else {
-              this.hasError = true
+              this.user_info = response.data
+              this.user_info.calc_integrals = this.user_info.integrals
             }
           })
           .catch(error => {
-            alert("登录已经过期请重新登录");
-            this.$router.push({path: "/"})
+            this.showNotic("登录已经过期请重新登录","/")
             console.log(error);
           });
       },
@@ -439,29 +463,34 @@
           sumAmt += Number(value) * 1
         }
         if (sumAmt <= 0) {
-          alert("余额不足,请充值");
+          this.showNotic("余额不足,请充值")
+          return
         }
 
         this.$axios.post(this.$app.context + '/userOrderpay', this.user_order)
           .then(response => {
             if (response.data) {
               console.log(response.data)
+              let msgRev = ""
+              let goPath = ""
 
               switch (response.data) {
                 case 0:
-                  alert("对不起,您余额不足,请充值");
+                  msgRev = "对不起,您余额不足,请充值";
                   break
                 case -1:
-                  alert("登录已经过期请重新登录,请重新登录!");
-                  this.$router.push({path: "/"})
+                  msgRev = "登录已经过期请重新登录,请重新登录!";
+                  goPath = "/"
                   break
                 case -2:
-                  alert("未到下单时间,请稍后购买!");
+                  msgRev = "未到下单时间,请稍后购买!";
                   break
                 default:
-                  alert("恭喜您,下注成功！");
+                  msgRev = "恭喜您,下注成功！";
                   break
               }
+
+              this.showNotic(msgRev, goPath)
 
               for (let i = 1; i < 11; i++) {
                 this.user_order["location_amt" + i] = 0
@@ -553,8 +582,11 @@
 
         if (this.user_info.integrals < sumAmt) {
           //alert("余额不足请充值");
+          this.user_info.calc_integrals = 0
+          this.showNotic("余额不足请充值")
         } else {
           this.user_info.calc_integrals = (this.user_info.integrals - sumAmt)
+          this.total_amt = sumAmt
         }
       }
 
@@ -562,6 +594,9 @@
     filters: {
       ft_total_amt: function (value) {
         return value;
+      },
+      filter_img: function (value) {
+        return "../assets/num_png/bullet-" + value + ".png"
       }
     }
   }
@@ -595,7 +630,7 @@
     height: 6.5em;
     margin-left: .5em;
     margin-top: .5em;
-    background-color: azure;
+    /*background-color: azure;*/
   }
 
   .form-group {
@@ -610,8 +645,8 @@
   /*以下是table body 添加滚动条*/
   table tbody {
     display: block;
-    height: 10.7rem;
-    width: 53.2rem;
+    height: 30rem;
+    width: 100%;
     overflow-y: scroll;
   }
 
@@ -621,11 +656,24 @@
     table-layout: fixed;
   }
 
-  table thead {
-    width: calc(100% - 1em)
+  table thead, tbody {
+    width: calc(100% - 0em)
   }
 
-  table thead th {
-    background: #ccc;
+  .avatar.avatar-xl {
+    font-size: 4.6rem !important;
+    font-weight: bold;
+    height: 4.2rem !important;
+    width: 4.2rem !important;
   }
+
+  .isShow {
+    display: contents;
+  }
+
+  .isHide {
+    display: none;
+  }
+
+
 </style>

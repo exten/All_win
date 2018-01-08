@@ -2,12 +2,12 @@
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 
 import 'normalize.css'
-import 'uiw-iconfont/fonts/w-iconfont.css'
 import 'spectre.css/dist/spectre.css'
 import 'spectre.css/dist/spectre-exp.css'
 import 'spectre.css/dist/spectre-icons.css'
 
-
+import 'luxbar/build/luxbar.min.css'
+import 'font-awesome/css/font-awesome.css'
 //import 'element-ui/lib/theme-chalk/index.css'
 
 import Vue from 'vue'

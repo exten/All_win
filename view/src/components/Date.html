@@ -5,7 +5,7 @@
   <title> JS实现倒计时(时、分，秒)</title>
   <script language="javascript" type="text/javascript">
     var interval = 1000;
-    
+
     function ShowCountDown(year, month, day, divname) {
       var now = new Date();
       var endDate = new Date(year, month - 1, day);
@@ -19,13 +19,30 @@
       var cc = document.getElementById(divname);
       cc.innerHTML = "脚本之家提示距离" + year + "年" + month + "月" + day + "日还有：" + day1 + "天" + hour + "小时" + minute + "分" + second + "秒";
     }
-    
+
     window.setInterval(function () {
       ShowCountDown(2010, 4, 20, 'divdown1');
     }, interval);
   </script>
+
+  <style>
+    /*body, input {
+      background: #e1e5e8;
+      font-family: "Georgia", Tahoma, Sans-Serif;
+      font-size: 18px;
+      line-height: 18px;
+    }*/
+
+    body,input {
+      font-family: Georgia;
+      font-family: Arial;
+      font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue", sans-serif;
+    }
+  </style>
+
 </head>
 <body>
-<div id="divdown1"></div>
+<input type="text">
+<div id="divdown1">ansdskk1232</div>
 </body>
 </html>

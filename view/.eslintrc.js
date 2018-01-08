@@ -35,7 +35,7 @@ module.exports = {
     "no-constant-condition": 2,//禁止在条件中使用常量表达式 if(true) if(1)
     "no-continue": 0,//禁止使用continue
     "no-control-regex": 2,//禁止在正则表达式中使用控制字符
-    "no-debugger": 2,//禁止使用debugger
+    "no-debugger": 1,//禁止使用debugger
     "no-delete-var": 2,//不能对var声明的变量使用delete操作符
     "no-div-regex": 1,//不能使用看起来像除法的正则表达式/=foo/
     "no-dupe-keys": 2,//在创建对象字面量时不允许键重复 {a:1,a:1}
@@ -59,7 +59,7 @@ module.exports = {
     "no-implied-eval": 2,//禁止使用隐式eval
     "no-inline-comments": 0,//禁止行内备注
     "no-inner-declarations": [2, "functions"],//禁止在块语句中使用声明（变量或函数）
-    "no-invalid-regexp": 2,//禁止无效的正则表达式
+    "no-invalid-regexp": 0,//禁止无效的正则表达式
     "no-invalid-this": 2,//禁止无效的this，只能用在构造器，类，对象字面量
     "no-irregular-whitespace": 2,//不能有不规则的空格
     "no-iterator": 2,//禁止使用__iterator__ 属性
