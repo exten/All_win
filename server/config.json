@@ -1,0 +1,10 @@
+{
+  "point": 8081,
+  "open_lttery_limit": 30,
+  "session_time_out": 30,
+  "db_host": "103.56.17.97",
+  "db_point": 3306,
+  "db_schema": "pk_10",
+  "db_user": "pk10",
+  "db_pswd": ""
+}
